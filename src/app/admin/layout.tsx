@@ -1,5 +1,7 @@
-import { DashboardIcon } from "@radix-ui/react-icons";
+"use client";
+import { BackpackIcon, DashboardIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 export default function AdminLayout({
@@ -7,11 +9,13 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
     <>
       <div className="drawer drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content p-4">{children}</div>
+        <div className="drawer-content">{children}</div>
         <div className="drawer-side">
           <label
             htmlFor="my-drawer"
@@ -25,9 +29,24 @@ export default function AdminLayout({
               </div>
             </div>
             <li className="mt-4 flex capitalize w-full">
-              <Link href="/admin/restaurants">
-                <DashboardIcon />
+              <Link
+                className={`${
+                  pathname === "/admin/restaurants" ? "active" : ""
+                }`}
+                href="/admin/restaurants"
+              >
+                <BackpackIcon />
                 Restaurants
+              </Link>
+            </li>
+
+            <li className="mt-4 flex capitalize w-full">
+              <Link
+                className={`${pathname === "/admin/dashboard" ? "active" : ""}`}
+                href="/admin/dashboard"
+              >
+                <DashboardIcon />
+                Dashboard
               </Link>
             </li>
           </ul>

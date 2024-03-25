@@ -6,11 +6,20 @@ export interface Restaurant {
   location?: string;
   phone?: string;
   image?: string;
-  managerId: string;
+  admin: string;
+  managers?: Manager[]; // Replace managerIds with an array of Manager objects
 }
 
-interface Menu {
+export interface Menu {
   name: string;
   price: number;
   description: string;
+}
+
+export interface Manager {
+  id?: string;
+  name: string;
+  address: string;
+  phone: string;
+  jobRole: string;
 }

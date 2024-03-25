@@ -1,4 +1,4 @@
-// useRestaurant.js
+// useRestaurants.js
 import { useState, useEffect } from "react";
 import {
   collection,
@@ -11,7 +11,7 @@ import {
 import { db } from "../firebase/firebase-client.config";
 import { Restaurant } from "../firestore/types";
 
-const useRestaurant = () => {
+const useRestaurants = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -77,4 +77,4 @@ const useRestaurant = () => {
   };
 };
 
-export default useRestaurant;
+export default useRestaurants;
