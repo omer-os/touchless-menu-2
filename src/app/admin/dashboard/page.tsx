@@ -8,7 +8,7 @@ export default function Page() {
   const { resetDatabase } = useAdminFunctions();
   return (
     <div>
-      <div className="navbar bg-base-300">
+      <div className="navbar bg-base-200">
         <div className="flex-1">
           <p className="text-xl capitalize">Dashboard</p>
         </div>

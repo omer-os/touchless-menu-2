@@ -28,7 +28,6 @@ export const listAllUsers = async () => {
 export async function getUserAuthData(uuid: string) {
   try {
     const userRecord = await auth().getUser(uuid);
-    console.log("Successfully fetched user data:", userRecord.toJSON());
     return userRecord; // This object contains all the user's data
   } catch (error) {
     console.error("Error fetching user data:", error);

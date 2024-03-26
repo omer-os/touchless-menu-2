@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { cookies } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,8 +15,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  const currentTheme = cookieStore.get("theme");
+
   return (
-    <html lang="en">
+    <html data-theme={currentTheme?.value} lang="en">
       <body className={inter.className}>{children}</body>
     </html>
   );
