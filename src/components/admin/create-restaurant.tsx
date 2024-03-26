@@ -51,6 +51,7 @@ export default function CreateRestaurant() {
     const updatedRestaurantData = {
       ...restaurantData,
       managers: Managers, // Ensure this is the latest state of Managers
+      managerIds: Managers.map((manager) => manager.id || ""),
     };
 
     addRestaurant(updatedRestaurantData);

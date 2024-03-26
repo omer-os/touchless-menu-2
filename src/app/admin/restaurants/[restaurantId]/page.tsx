@@ -239,6 +239,10 @@ export default function page() {
                 onClick={() => {
                   updateRestaurant({
                     managers: [...(restaurant?.managers || []), ...newManagers],
+                    managerIds: [
+                      ...(restaurant?.managerIds || []),
+                      ...newManagers.map((m) => m.id || ""),
+                    ],
                   });
                   setnewManagers([]);
                 }}

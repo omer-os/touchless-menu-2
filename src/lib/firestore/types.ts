@@ -7,7 +7,8 @@ export interface Restaurant {
   phone?: string;
   image?: string;
   admin: string;
-  managers?: Manager[]; // Replace managerIds with an array of Manager objects
+  managers?: Manager[];
+  managerIds?: string[];
 }
 
 export interface Menu {
@@ -22,4 +23,11 @@ export interface Manager {
   address: string;
   phone: string;
   jobRole: string;
+}
+
+export interface User {
+  uid: string; // Unique identifier from Firebase Authentication
+  email: string;
+  displayName: string;
+  createdAt: FirebaseFirestore.Timestamp | null;
 }

@@ -1,5 +1,9 @@
 "use client";
-import { BackpackIcon, DashboardIcon } from "@radix-ui/react-icons";
+import {
+  BackpackIcon,
+  CircleBackslashIcon,
+  DashboardIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -47,6 +51,16 @@ export default function AdminLayout({
               >
                 <DashboardIcon />
                 Dashboard
+              </Link>
+            </li>
+
+            <li className="mt-4 flex capitalize w-full">
+              <Link
+                className={`${pathname === "/admin/users" ? "active" : ""}`}
+                href="/admin/users"
+              >
+                <CircleBackslashIcon />
+                users
               </Link>
             </li>
           </ul>

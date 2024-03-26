@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { User } from "./lib/firestore/types";
 
 // List of routes that require authentication
 const requiresAuthRoutes = ["/admin", "/protected"];
@@ -34,9 +35,23 @@ export async function middleware(request: NextRequest) {
       },
     });
 
+    const result: { isLogged: boolean } & {
+      user: User & {
+        role: "admin" | "user";
+      };
+    } = await responseAPI.json();
+
     // Redirect to login page if session is not valid
     if (responseAPI.status !== 200) {
       return NextResponse.redirect(new URL("/auth/login", request.url));
+    }
+    console.log("result :", result);
+
+    if (
+      request.nextUrl.pathname.startsWith("/admin") &&
+      result.user.role !== "admin"
+    ) {
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

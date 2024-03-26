@@ -15,7 +15,6 @@ const UpdateRestaurantComponent: React.FC<UpdateRestaurantComponentProps> = ({
   updateRestaurant,
   loading,
 }) => {
-  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [editData, setEditData] = useState<Restaurant | null>(null);
 
@@ -36,7 +35,11 @@ const UpdateRestaurantComponent: React.FC<UpdateRestaurantComponentProps> = ({
       i === index ? { ...manager, [field]: e.target.value } : manager
     );
     if (updatedManagers) {
-      setEditData({ ...editData, managers: updatedManagers });
+      setEditData({
+        ...editData,
+        managers: updatedManagers,
+        managerIds: updatedManagers.map((manager) => manager.id || ""),
+      });
     }
   };
 
