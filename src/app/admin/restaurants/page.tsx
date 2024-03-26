@@ -5,7 +5,7 @@ import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default function page() {
+export default function Page() {
   const { restaurants, addRestaurant } = useRestaurant();
   const [NewRestName, setNewRestName] = useState("");
   const { user } = useCurrentUser();

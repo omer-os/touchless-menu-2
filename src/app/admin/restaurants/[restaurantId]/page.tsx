@@ -7,7 +7,7 @@ import Link from "next/link";
 import { redirect, useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function page() {
+export default function Page() {
   const { restaurantId } = useParams();
   !restaurantId && redirect("/admin/restaurants");
 

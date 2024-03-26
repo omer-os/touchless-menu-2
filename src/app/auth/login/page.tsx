@@ -1,6 +1,6 @@
 "use client";
 import { getRedirectResult, signInWithRedirect } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth, provider } from "@/lib/firebase/firebase-client.config";
 

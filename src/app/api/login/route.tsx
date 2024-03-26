@@ -1,13 +1,10 @@
-import {
-  customInitApp,
-  getUserAuthData,
-} from "@/lib/firebase/firebase-admin-config";
+import { User } from "@/lib/firestore/types";
+import admin, { getUserAuthData } from "@/lib/firebase/firebase-admin-config";
 import { auth } from "firebase-admin";
 import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 // Init the Firebase SDK every time the server is called
-customInitApp();
 
 const db = admin.firestore();
 
@@ -48,9 +45,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   return NextResponse.json({}, { status: 200 });
 }
-
-import admin from "firebase-admin";
-import { User } from "@/lib/firestore/types";
 
 export async function GET(request: NextRequest) {
   const sessionCookie = cookies().get("session")?.value || "";

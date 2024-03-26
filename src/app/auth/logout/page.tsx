@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/firebase-client.config";
 import { useRouter } from "next/navigation";
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
 
   async function signOutUser() {

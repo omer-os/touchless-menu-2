@@ -16,6 +16,8 @@ export function customInitApp() {
   }
 }
 
+customInitApp();
+
 export const AdminDb = admin.firestore();
 
 export const listAllUsers = async () => {

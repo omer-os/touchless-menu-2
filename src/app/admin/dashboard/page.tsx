@@ -4,7 +4,7 @@ import { CaretLeftIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import React from "react";
 
-export default function page() {
+export default function Page() {
   const { resetDatabase } = useAdminFunctions();
   return (
     <div>
