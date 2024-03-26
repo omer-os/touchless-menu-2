@@ -2,19 +2,12 @@ export interface Restaurant {
   id?: string;
   name: string;
   description?: string;
-  menu?: Menu[];
+  menus?: MenuItem[]; // A restaurant can have multiple top-level menu items
   location?: string;
   phone?: string;
   image?: string;
   admin: string;
-  managers?: Manager[];
   managerIds?: string[];
-}
-
-export interface Menu {
-  name: string;
-  price: number;
-  description: string;
 }
 
 export interface Manager {
@@ -30,4 +23,15 @@ export interface User {
   email: string;
   displayName: string;
   createdAt: FirebaseFirestore.Timestamp | null;
+}
+
+export interface MenuItem {
+  id?: string;
+  name: string;
+  type: "category" | "item";
+  parentId: string | null;
+  description?: string;
+  price?: number;
+  image?: string;
+  options?: string[];
 }

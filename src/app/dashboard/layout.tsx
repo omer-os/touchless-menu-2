@@ -7,26 +7,43 @@ import {
   PinLeftIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { useState } from "react";
+import { atom, useAtom } from "jotai";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+export const DashboardSidebarOpen = atom(false);
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [sidebarOpen, setSidebarOpen] = useAtom(DashboardSidebarOpen);
   const pathname = usePathname();
+  const params = useParams() as {
+    restaurantId: string;
+  };
   const links = [
     {
-      path: "/admin/restaurants",
+      path: `/dashboard/${params.restaurantId}/analatics/`,
       icon: <BackpackIcon />,
-      label: "Restaurants",
+      label: "Analatics",
     },
-    { path: "/admin/dashboard", icon: <DashboardIcon />, label: "Dashboard" },
-    { path: "/admin/users", icon: <CircleBackslashIcon />, label: "Users" },
+    {
+      path: `/dashboard/${params.restaurantId}/menu/`,
+      icon: <DashboardIcon />,
+      label: "Menu",
+    },
+    {
+      path: `/dashboard/${params.restaurantId}/managers/`,
+      icon: <CircleBackslashIcon />,
+      label: "Users",
+    },
   ];
 
-  // Function to extract the second segment of the URL path
   const getSecondPathSegment = (path: string) => {
-    const segments = path.split("/").filter(Boolean); // Split and remove empty segments
-    return segments[1] || ""; // Return the second segment if available, otherwise an empty string
+    const segments = path.split("/").filter(Boolean);
+    return segments[2] || "";
   };
 
   const secondSegment = getSecondPathSegment(pathname);

@@ -60,7 +60,7 @@ export default function CreateRestaurant() {
   return (
     <div>
       <button
-        className="btn"
+        className="btn w-full md:w-max btn-primary mt-4"
         onClick={() => {
           setModalOpen(true);
         }}

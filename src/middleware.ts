@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { User } from "./lib/firestore/types";
+import {
+  AdminDb,
+  getRestaurantById,
+} from "./lib/firebase/firebase-admin-config";
 
 // List of routes that require authentication
-const requiresAuthRoutes = ["/admin", "/protected"];
+const requiresAuthRoutes = ["/admin", "/dashboard"];
 
 // Firebase authentication initiation and callback routes
 const firebaseAuthRoutes = ["/auth/start", "/auth/callback"];
@@ -50,6 +54,26 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname.startsWith("/admin") &&
       result.user.role !== "admin"
     ) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    if (pathname.startsWith("/dashboard/")) {
+      const restaurantId = pathname.split("/")[2];
+      const responseAPI = await fetch(
+        `${origin}/api/dashboard/check?restaurantId=${restaurantId}`,
+        {
+          headers: {
+            Cookie: `session=${session.value}`,
+          },
+        }
+      );
+
+      const res = (await responseAPI.json()) as { access: boolean };
+
+      if (res.access) {
+        return NextResponse.next();
+      }
+
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

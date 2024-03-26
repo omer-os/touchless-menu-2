@@ -6,14 +6,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
-import { SidebarOpenAtom } from "../layout";
 
 export default function Page() {
   const { restaurants, addRestaurant } = useRestaurant();
   const [NewRestName, setNewRestName] = useState("");
   const { user } = useCurrentUser();
-
-  const [sidebarOpen, setSidebarOpen] = useAtom(SidebarOpenAtom);
 
   return (
     <div className="">
@@ -22,10 +19,7 @@ export default function Page() {
           <p className="text-xl capitalize">Restaurants</p>
         </div>
 
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="btn btn-ghost"
-        >
+        <button className="btn btn-ghost">
           <HamburgerMenuIcon />
         </button>
       </div>

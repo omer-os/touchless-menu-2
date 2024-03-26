@@ -31,10 +31,13 @@ const useRestaurants = () => {
   };
 
   const addRestaurant = async (newRestaurant: Restaurant) => {
-    // Type the parameter as Restaurant
     try {
-      await addDoc(collection(db, "restaurants"), newRestaurant);
-      fetchRestaurants();
+      const docRef = await addDoc(collection(db, "restaurants"), newRestaurant);
+      const addedRestaurant = { id: docRef.id, ...newRestaurant }; // Create a new restaurant object including the generated id
+      setRestaurants((prevRestaurants) => [
+        ...prevRestaurants,
+        addedRestaurant,
+      ]); // Update the state to include the new restaurant
     } catch (error) {
       console.error("Error adding restaurant:", error);
     }

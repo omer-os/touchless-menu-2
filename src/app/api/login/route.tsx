@@ -86,7 +86,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // If user exists, return their data
     return NextResponse.json(
       {
         isLogged: true,
